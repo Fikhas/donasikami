@@ -1,0 +1,21 @@
+<section id="blog" class="blog">
+    <h1>BLOG</h1>
+    <% if(blogs.length != 0) { %>
+        <div class="blog-list">
+            <% blogs.forEach(blog => { %>
+                <div class="card" style="width: 18rem;">
+                    <div class="box-img">
+                        <img src="<%= blog.image %>" class="card-img-top" alt="...">
+                    </div>
+                <div class="card-body">
+                    <h5 class="card-title"><%= blog.title %></h5>
+                    <p class="card-text"><%= blog.article.substring(0, 100) + "..." %></p>
+                    <a href="/article/<%= blog._id %>" class="btn btn-primary">Baca selengkapnya</a>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p>Belum ada blog untuk saat ini.</p>
+    <% } %>
+</section>

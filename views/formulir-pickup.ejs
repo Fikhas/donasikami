@@ -1,0 +1,88 @@
+<section class="form-dua">
+    <h1>FORMULIR DONASI</h1>
+    <% if(typeof errors !="undefined" ) { %>
+        <p>
+            <%= errors %>
+        </p>
+    <% } %>
+    <div class="step">
+        <a href="/formulir-userId">
+            <div class="personal-data item">
+                <img src="assets/images/data-diri.png" alt="Data Diri">
+            </div>
+        </a>
+        <a href="/formulir-pickup">
+            <div class="pickup-schedule item">
+                <img src="assets/images/box.png" alt="Pickup Schedule">
+            </div>
+        </a>
+    </div>
+    <form method="post" action="/pickup" enctype="multipart/form-data">
+        <div class="category-box">
+            <p>Kategori Barang</p>
+            <div class="category">
+                <div class="category-items">
+                    <input type="checkbox" value="pakaian" id="pakaian" name="stuffType" htmlspecialchars>
+                    <label for="pakaian">PAKAIAN</label>
+                </div>
+                <div class="category-items">
+                    <input type="checkbox" value="buku-majalah" id="buku-majalah" name="stuffType">
+                    <label for="buku-majalah">BUKU/MAJALAH</label>
+                </div>
+                <div class="category-items">
+                    <input type="checkbox" value="sembako" id="sembako" name="stuffType">
+                    <label for="sembako">SEMBAKO</label>
+                </div>
+                <div class="category-items">
+                    <label for="lainnya">LAINNYA: </label>
+                    <input type="text" id="lainnya">
+                </div>
+            </div>
+        </div>
+        
+        <div class="condition-box">
+            <p>Kondisi Barang</p>
+            <div class="condition">
+                <div class="category-items">
+                    <input type="checkbox" value="baru" id="baru" name="conditionType">
+                    <label for="baru">BARU</label>
+                </div>
+                <div class="category-items">
+                    <input type="checkbox" value="bekas" id="bekas" name="conditionType">
+                    <label for="bekas">BEKAS</label>
+                </div>
+                <div class="category-items">
+                    <input type="checkbox" value="campuran" id="campuran" name="conditionType">
+                    <label for="campuran">CAMPURAN</label>
+                </div>
+                <div class="category-items">
+                    <label for="berat-barang">Berat Barang: </label>
+                    <input type="text" id="berat-barang">
+                </div>
+            </div>
+        </div>
+
+        <div class="description">
+            <label for="descriptionForm">Deskripsi Barang</label>
+            <textarea name="description" id="descriptionForm" cols="30" rows="5" required></textarea>
+        </div>
+
+        <div class="schedule">
+            <div class="date-box">
+                <label for="date">Tentukan Jadwal Pick Up Barang</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="time-box">
+                <label for="time">Tentukan Waktu Pick Up Barang</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+        </div>
+
+        <div class="image">
+            <label for="image">Foto Barang</label>
+            <br>
+            <input type="file" id="image" name="image" required>
+        </div>
+        <button type="submit" class="btn"><strong>KIRIM</strong></button>
+    </form>
+</section>

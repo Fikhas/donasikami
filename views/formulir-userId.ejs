@@ -1,0 +1,83 @@
+<section class="form-satu">
+    <h1>FORMULIR DONASI</h1>
+    <% if(typeof errors != "undefined" ) { %>
+        <% errors.forEach(error=> { %>
+            <p>
+                <%= error.msg %>
+            </p>
+        <% }) %>
+    <% } %>
+    <div class="step">
+        <a href="/formulir-userId">
+            <div class="personal-data item">
+                <img src="assets/images/data-diri.png" alt="Data Diri">
+            </div>
+        </a>
+        <a href="/formulir-pickup">
+            <div class="pickup-schedule item">
+                <img src="assets/images/box.png" alt="Pickup Schedule">
+            </div>
+        </a>
+    </div>
+    <% if(!data.length == 0) { %>
+        <% data.forEach(d => { %>
+            <form method="post" action="/formulir-userId">
+                <div class="name-input input">
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" id="name" name="name" value="<%= d.name %>" required>
+                </div>
+                <div class="double-input">
+                    <div class="notelp-input input">
+                        <label for="phone">No. Telp</label>
+                        <input type="tel" id="phone" name="phone" value="<%= d.phone %>" required>
+                    </div>
+                    <div class="email-input input">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="<%= d.email %>" required>
+                    </div>
+                </div>
+                <div class="address-input input">
+                    <label for="adress">Alamat Lengkap</label>
+                    <textarea name="address" id="address" cols="30" rows="10" value="<%= d.address %>" required><%= d.address %></textarea>
+                </div>
+                <div id="passwordHelpBlock" class="form-text">
+                    Notes
+                    <ul>
+                        <li>No. Telp & Email akan dihubungi untuk konfirmasi donasi</li>
+                        <li>Alamat Lengkap merupakan alamat untuk pick up barang donasi</li>
+                    </ul>
+                </div>
+                <button type="submit" class="btn"><strong>SELANJUTNYA</strong></button>
+            </form>
+        <% }) %>
+    <% }else{ %>
+        <form method="post" action="/formulir-userId">
+            <div class="name-input input">
+                <label for="name">Nama Lengkap</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="double-input">
+                <div class="notelp-input input">
+                    <label for="phone">No. Telp</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="email-input input">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="address-input input">
+                <label for="adress">Alamat Lengkap</label>
+                <textarea name="address" id="address" cols="30" rows="10" required></textarea>
+            </div>
+            <div id="passwordHelpBlock" class="form-text">
+                Notes
+                <ul>
+                    <li>No. Telp & Email akan dihubungi untuk konfirmasi donasi</li>
+                    <li>Alamat Lengkap merupakan alamat untuk pick up barang donasi</li>
+                </ul>
+            </div>
+            <button type="submit" class="btn"><strong>SELANJUTNYA</strong></button>
+        </form>
+    <% } %>
+</section>
