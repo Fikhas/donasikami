@@ -8,7 +8,15 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const multer = require("multer");
 const {body, check, validationResult} = require("express-validator");
+const compression = require("compression");
+const helmet = require("helmet");
+const RateLimit = require("express-rate-limit");
 const port = 3000;
+
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 20,
+});
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -52,6 +60,15 @@ if(!fs.existsSync("./dataTemp/dataTempFile.json")){
 require("./utils/db")
 const {Donatur, Account, Article} = require("./model/modelsdb")
 
+app.use(compression());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+    },
+  })
+);
+app.use(limiter);
 app.use(methodOverride('_method'));
 app.set("view engine", "ejs")
 app.use(expressLayouts)
