@@ -49,9 +49,6 @@ if(!fs.existsSync("./dataTemp/dataTempFile.json")){
   fs.writeFileSync("./dataTemp/dataTempFile.json", "[]", "utf-8")
 }
 
-require("./utils/db")
-const {Donatur, Account, Article} = require("./model/modelsdb")
-
 app.use(methodOverride('_method'));
 app.set("view engine", "ejs")
 app.use(expressLayouts)
