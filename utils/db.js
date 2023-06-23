@@ -1,3 +1,3 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/donasiKami', {
+mongoose.connect('mongodb+srv://fikrihasan_30:ZOrcfbvr9ogYFBSJ@cluster0.zr5xf.mongodb.net/', {
 });
