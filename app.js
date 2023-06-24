@@ -10,13 +10,12 @@ const multer = require("multer");
 const {body, check, validationResult} = require("express-validator");
 const compression = require("compression");
 const helmet = require("helmet");
-const RateLimit = require("express-rate-limit");
-const port = 3000;
+// const RateLimit = require("express-rate-limit");
 
-const limiter = RateLimit({
-  windowMs: 1 * 60 * 1000, // 1 minute
-  max: 20,
-});
+// const limiter = RateLimit({
+//   windowMs: 1 * 60 * 1000, // 1 minute
+//   max: 20,
+// });
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -68,7 +67,7 @@ app.use(
     },
   })
 );
-app.use(limiter);
+// app.use(limiter);
 app.use(methodOverride('_method'));
 app.set("view engine", "ejs")
 app.use(expressLayouts)
@@ -220,6 +219,4 @@ app.get("/article/:blogId", async (req, res) =>{
   })
 })
 
-app.listen(port, () => {
-    console.log(`http://localhost:${port}`)
-})
+module.exports = app;
