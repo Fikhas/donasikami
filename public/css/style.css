@@ -117,21 +117,6 @@ body{
     margin-bottom: 128px;
 }
 
-.border-title{
-    background-color: white;
-    width: 50%;
-    color: #1B3C65;
-    border-radius: 4px;
-    margin-bottom: 32px;
-    padding: 16px;
-    box-sizing: border-box;
-}
-
-.border-title h1{
-    margin: 0;
-    font-size: 1.5rem;
-}
-
 .method .step{
     display: flex;
     flex-direction: row;
@@ -557,30 +542,134 @@ body{
     margin-bottom: 64px;
 }
 
+/* GENERAL STYLE */
+.border-title {
+    background-color: white;
+    width: 50%;
+    color: #1B3C65;
+    border-radius: 4px;
+    margin-bottom: 32px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.border-title h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
 @media screen and (max-width: 768px) {
     body{
-        padding: 0 32px;
+        padding: 0;
+        width: 100vw;
     }
 
+    .navbar-toggler{
+        background-color: white;
+    }
+
+    .navbar-toggler-icon{
+        border: 1px solid black;
+    }
+
+    /* HOME SECTION */
     .home{
         flex-direction: column;
         width: 100%;
-        padding: 0;
+        padding: 128px 0;
+        gap: 20px 0;
     }
 
     .home .left {
         width: 100%;
     }
 
-    .home .right{
-        width: 100%;
-    }
-
     .home .left h1{
-        font-size: 2rem;
+        font-size: 3rem;
+        line-height: 42px;
     }
 
-    .list-terms{
+    .home .left a{
+        width: 40%;
+        font-size: 10px;
+        line-height: 12px;
+        padding: 4px;
+        text-align: center;
+        margin-right: 16px;
+    }
+
+    .home .right {
+        display: none;
         width: 100%;
+        justify-content: center;
+    }
+
+    /* TERMS SECTION */
+    .terms{
+        padding: 0;
+    }
+
+    .terms .list-terms{
+        width: 100%;
+    }
+
+    .terms .category{
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .terms .category .item{
+        width: 40%;
+    }
+
+    .terms .category .item img{
+        height: 80px;
+    }
+
+    /* METHOD */
+    .method .step .item{
+        width: 40%;
+    }
+
+    .method .step .item img{
+        height: 60px;
+    }
+
+    /* ABOUT */
+    .about{
+        flex-direction: column;
+    }
+
+    .about .item{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* ABOUT US SECTION */
+    .about-us .card-box {
+        flex-direction: column;
+    }
+
+    .about-us .card-box .card-item {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* GENERAL STYLE */
+    .border-title {
+        background-color: white;
+        width: 80%;
+        color: #1B3C65;
+        border-radius: 4px;
+        margin-bottom: 32px;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+    
+    .border-title h1 {
+        margin: 0;
+        font-size: 1.2rem;
     }
 }

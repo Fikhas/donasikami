@@ -17,6 +17,13 @@ const helmet = require("helmet");
 //   max: 20,
 // });
 
+const liveReloadServer = livereload.createServer();
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("localhost:3000");
+  }, 100);
+});
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './public/data/uploads')
@@ -35,13 +42,6 @@ const fileFilter = (req, file, cb) => {
     }
 }
 
-// const liveReloadServer = livereload.createServer();
-// liveReloadServer.server.once("connection", () => {
-//   setTimeout(() => {
-//     liveReloadServer.refresh("localhost:3000");
-//   }, 100);
-// });
-
 const dataTempDonatur = () => {
   let dataTemp = fs.readFileSync("./dataTemp/dataTempFile.json", "utf-8")
   dataTemp = JSON.parse(dataTemp)
@@ -59,14 +59,14 @@ if(!fs.existsSync("./dataTemp/dataTempFile.json")){
 require("./utils/db")
 const {Donatur, Account, Article} = require("./model/modelsdb")
 
-app.use(compression());
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
-    },
-  })
-);
+// app.use(compression());
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+//     },
+//   })
+// );
 // app.use(limiter);
 app.use(methodOverride('_method'));
 app.set("view engine", "ejs")
@@ -191,14 +191,14 @@ app.post("/register", [
     })
   }else{
     if(req.body.password == req.body.passwordConfirm) {
-    const newAccount = {
+      const newAccount = {
       email: req.body.email,
       password: req.body.password
     }
-    Account.insertMany(newAccount)
-    res.redirect("/")
-    } else if (req.body.password == req.body.passwordConfirm) {
-      res.redirect("/register")
+      Account.insertMany(newAccount)
+      res.redirect("/")
+    }else{
+      res.redirect("/register");
     }
   }
 })
