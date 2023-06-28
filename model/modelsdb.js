@@ -1,6 +1,27 @@
 const mongoose = require('mongoose')
 
+const accountSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+})
+
+const Account = mongoose.model('Account', accountSchema)
+
 const articleSchema = new mongoose.Schema({
+    author: {
+        type: mongoose.ObjectId,
+        ref: Account
+    },
     image: {
         type: String,
         required: true
@@ -12,7 +33,7 @@ const articleSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
-    },
+    }
 }, {
     timestamps: true
 })
@@ -59,19 +80,7 @@ const Donatur = mongoose.model('Donatur', {
         type: String,
         required: true
     }
-
 });
-
-const Account = mongoose.model('Account', {
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
-})
 
 const Article = mongoose.model('Article', articleSchema)
 
@@ -83,4 +92,4 @@ const Article = mongoose.model('Article', articleSchema)
 
 // contact1.save().then((contact) => console.log(contact));
 
-module.exports = {Donatur, Account, Article};
+module.exports = {Donatur, Account, Article}

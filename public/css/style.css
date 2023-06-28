@@ -4,7 +4,7 @@ body{
     color: white;
 }
 
-/* STYLE UNTUK HALAMAN BERANDA */
+/* HOME PAGE */
 .navbar{
     background-color: #1B3C65;
     width: 100%;
@@ -203,7 +203,22 @@ body{
     opacity: .7;
 }
 
-/* STYLE UNTUK HALAMAN USERID */
+.write-article{
+    padding: 104px;
+}
+
+.write-article form{
+    display: flex;
+    flex-direction: column;
+    gap: 32px 0;
+}
+
+.write-article form .title{
+    display: flex;
+    flex-direction: column;
+}
+
+/* USERID PAGE */
 .form-satu{
     padding: 104px 0 0 0;
     width: 100%;
@@ -221,7 +236,7 @@ body{
     width: 20%;
     justify-content: space-between;
     margin: auto;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
 }
 
 .form-satu .step .item{
@@ -302,7 +317,7 @@ body{
     margin: auto;
 }
 
-/* STYLE UNTUK HALAMAN PICKUP */
+/* PICKUP PAGE */
 .form-dua{
     width: 100%;
     margin: 0 auto 64px;
@@ -394,7 +409,7 @@ body{
     margin: 16px auto 0;
 }
 
-/* HALAMAN LOGIN */
+/* LOGIN PAGE */
 .login{
     padding: 104px 0;
     display: flex;
@@ -443,7 +458,7 @@ body{
     color: aqua;
 }
 
-/* HALAMAN REGISTER */
+/* REGISTER PAGE */
 .register {
     padding: 104px 0;
     display: flex;
@@ -497,7 +512,7 @@ body{
     color: aqua;
 }
 
-/* HALAMAN BLOG */
+/* BLOG PAGE */
 .blog {
     padding: 128px 0;
     box-sizing: border-box;
@@ -525,7 +540,7 @@ body{
     overflow: hidden;
 }
 
-/* HALAMAN ARTICLE */
+/* ARTICLE PAGE */
 .article{
     padding: 128px 0;
 }
@@ -540,6 +555,42 @@ body{
 
 .article article{
     margin-bottom: 64px;
+}
+
+/* ACCOUNT PAGE */
+.account{
+    padding: 128px;
+}
+
+.account .name{
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+.account .name .username-title{
+    opacity: .7;
+    margin: 0;
+    font-size: 14px;
+}
+
+.account .name .username-text{
+    margin: 0;
+}
+
+.account .button{
+    display: inline-block;
+    background-color: #6EBADF;
+    border-radius: 5px;
+    width: 20%;
+    margin: auto;
+    border: none;
+    color: #1B3C65;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 10px;
 }
 
 /* GENERAL STYLE */
@@ -565,11 +616,11 @@ body{
     }
 
     .navbar-toggler{
-        background-color: white;
+        background-color: #6EBADF;
     }
 
     .navbar-toggler-icon{
-        border: 1px solid black;
+        background-image: url(../assets/icons/menu.svg);
     }
 
     /* HOME SECTION */
@@ -655,6 +706,29 @@ body{
     .about-us .card-box .card-item {
         width: 100%;
         margin-bottom: 20px;
+    }
+
+    /* USERID PAGE */
+    .form-satu .step{
+        display: flex;
+        width: 50%;
+        flex-direction: row;
+    }
+
+    .form-satu button{
+        width: 50%;
+    }
+
+    /* PICKUP PAGE */
+    .form-dua .step{
+        display: flex;
+        width: 50%;
+        flex-direction: row;
+    }
+
+    .form-dua .schedule{
+        flex-direction: column;
+        gap: 16px 0;
     }
 
     /* GENERAL STYLE */

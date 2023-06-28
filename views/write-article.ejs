@@ -1,0 +1,17 @@
+<section id="write-article" class="write-article">
+    <form action="">
+        <div class="title">
+            <label for="title">Judul Artikel</label>
+            <input type="text" id="title" name="title">
+        </div>
+        <div class="article-place">
+            <label for="article-box">Tulis Artikel</label>
+            <div class="article-box" id="article-box">
+            </div>
+        </div>
+    </form>
+</section>
+
+<script>
+    const editor = new FroalaEditor("#article-box");
+</script>

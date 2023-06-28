@@ -10,6 +10,7 @@ const multer = require("multer");
 const {body, check, validationResult} = require("express-validator");
 const compression = require("compression");
 const helmet = require("helmet");
+const session = require("express-session");
 // const RateLimit = require("express-rate-limit");
 
 // const limiter = RateLimit({
@@ -68,14 +69,40 @@ const {Donatur, Account, Article} = require("./model/modelsdb")
 //   })
 // );
 // app.use(limiter);
+
+// const tes = Account.findOne({email: "fikrihasan309@gmail.com"}).then(
+//   akun => {
+//     const article1 = {
+//       author: akun._id,
+//       image: "/assets/images/plumpang.png",
+//       article: "lorem",
+//       title: "lorem"
+//     }
+//     Article.insertMany(article1).then(() => console.log("oke"))
+//   }
+// )
+
+// const article1 = Article.findOne({_id: '649a9b7e73aa63c171219702'}).then((artikel) => {
+//   Account.findOne({_id: artikel.author}).then(author => console.log(author)).catch(e => console.log(e))
+// })
+
+// MIDDLEWARE
 app.use(methodOverride('_method'));
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.use(express.static("public"))
+app.use("/froalacss", express.static(__dirname + "/node_modules/froala-editor/css/froala_editor.pkgd.min.css"))
+app.use("/froalajs", express.static(__dirname + "/node_modules/froala-editor/js/froala_editor.pkgd.min.js"))
 app.use(connectLiveReload())
 app.use(multer({storage: storage, fileFilter: fileFilter}).single("image"))
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(session({
+  secret: "secret",
+  saveUninitialized: true,
+  resave: true
+}))
 
+// HOME ROUTE
 app.get("/", (req, res) => {
   dataTemp = dataTempDonatur()
   if(!dataTemp.length == 0){
@@ -86,6 +113,7 @@ app.get("/", (req, res) => {
   })
 })
 
+// FORMULIR DONASI ROUTE
 app.get("/formulir-userId", (req, res) => {
   dataTemp = dataTempDonatur()
   res.render("formulir-userId", {
@@ -148,28 +176,7 @@ app.post("/formulir-pickup", (req, res, next) => {
   }
 })
 
-app.get("/login", (req, res) => {
-  res.render("login", {
-    layout: "layouts/main-layout",
-  })
-})
-
-app.post("/login", async (req, res) => {
-  const account = await Account.findOne({email: req.body.email})
-  let result
-  if(!account){
-    result = new Error("Akun ga ada")
-    res.render("login", {
-      layout: "layouts/main-layout",
-      errors: result.message
-    })
-  }else{
-    if(account.password == req.body.password) {
-      res.redirect("/")
-    }
-  }
-})
-
+// REGISTER, LOGIN DAN LOGOUT ROUTE
 app.get("/register", (req, res) => {
   res.render("register", {
     layout: "layouts/main-layout",
@@ -184,7 +191,7 @@ app.post("/register", [
 ], (req, res) => {
   console.log(req.body)
   const result = validationResult(req)
-  if(result.isEmpty){
+  if(!result.isEmpty){
     res.render("register", {
       layout: "layouts/main-layout",
       errors: result.array()
@@ -193,7 +200,8 @@ app.post("/register", [
     if(req.body.password == req.body.passwordConfirm) {
       const newAccount = {
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      username: req.body.username
     }
       Account.insertMany(newAccount)
       res.redirect("/")
@@ -203,6 +211,41 @@ app.post("/register", [
   }
 })
 
+app.post("/login", async (req, res) => {
+  const account = await Account.findOne({email: req.body.email})
+  console.log(account)
+  let result
+  if(!account){
+    result = new Error("Akun ga ada")
+    res.render("login", {
+      layout: "layouts/main-layout",
+      errors: result.message
+    })
+  }else{
+    if(account.password == req.body.password) {
+      req.session.login = true
+      req.session.user = account
+      req.session.save()
+      res.render("account", {
+        layout: "layouts/main-layout",
+        data: req.session.user
+      })
+    }else{
+      result = new Error("Password salah")
+      res.render("login", {
+        layout: "layouts/main-layout",
+        errors: result.message
+      })
+    }
+  }
+})
+
+app.get("/logout", (req, res) => {
+  req.session.destroy()
+  res.redirect("/")
+})
+
+// BLOG ROUTE
 app.get("/blog", async (req, res) => {
   const blogs = await Article.find()
   res.render("blog", {
@@ -217,6 +260,26 @@ app.get("/article/:blogId", async (req, res) =>{
     layout: "layouts/main-layout",
     article
   })
+})
+
+app.get("/write", (req, res) => {
+  res.render("write-article", {
+    layout: "layouts/main-layout"
+  })
+})
+
+// ACCOUNT ROUTE
+app.get("/account", (req, res) => {
+  if(req.session.login){
+    res.render("account", {
+      layout: "layouts/main-layout",
+      data: req.session.user
+    })
+  }else{ 
+    res.render("login", {
+      layout: "layouts/main-layout"
+    })
+  }
 })
 
 module.exports = app;
