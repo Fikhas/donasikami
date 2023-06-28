@@ -13,14 +13,13 @@ const accountSchema = new mongoose.Schema({
         type: String,
         required: true
     }
+}, {
+    timestamps: true
 })
-
-const Account = mongoose.model('Account', accountSchema)
 
 const articleSchema = new mongoose.Schema({
     author: {
         type: mongoose.ObjectId,
-        ref: Account
     },
     image: {
         type: String,
@@ -38,7 +37,7 @@ const articleSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const Donatur = mongoose.model('Donatur', {
+const donaturSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -80,9 +79,13 @@ const Donatur = mongoose.model('Donatur', {
         type: String,
         required: true
     }
-});
+}, {
+    timestamps: true
+})
 
+const Donatur = mongoose.model('Donatur', donaturSchema);
 const Article = mongoose.model('Article', articleSchema)
+const Account = mongoose.model('Account', accountSchema)
 
 // const contact1 = new Contact({
 //     nama: 'Rifqi',

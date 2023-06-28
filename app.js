@@ -30,7 +30,7 @@ const storage = multer.diskStorage({
       cb(null, './public/data/uploads')
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + file.originalname)
+      cb(null, Date.now() + "_" + file.originalname)
     },
 
 })
@@ -266,6 +266,26 @@ app.get("/write", (req, res) => {
   res.render("write-article", {
     layout: "layouts/main-layout"
   })
+})
+
+app.post("/write", (req, res) => {
+  // let result
+  // if(!req.file) {
+  //   result = new Error("Esktensi file hanya PNG, JPG dan JPEG")
+  //   res.render("write-article", {
+  //     layout: "layouts/main-layout",
+  //     errors: result.message
+  //   })
+  // }else{
+  //   const newArticle = {
+  //     author: req.session.user._id,
+  //     image: '.\\data\\uploads\\' + req.file.filename,
+  //     article: req.body.article,
+  //     title: req.body.title
+  //   }
+  // }
+  console.log(req.body)
+  res.redirect("/")
 })
 
 // ACCOUNT ROUTE

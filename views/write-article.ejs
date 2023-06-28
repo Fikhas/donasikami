@@ -1,14 +1,18 @@
 <section id="write-article" class="write-article">
-    <form action="">
+    <form action="/write" method="post" enctype="multipart/form-data">
         <div class="title">
             <label for="title">Judul Artikel</label>
             <input type="text" id="title" name="title">
         </div>
+        <div class="image">
+            <label for="image">Unggah gambar</label>
+            <input type="file" id="image" name="image">
+        </div>
         <div class="article-place">
             <label for="article-box">Tulis Artikel</label>
-            <div class="article-box" id="article-box">
-            </div>
+            <textarea name="article" id="article-box"></textarea>
         </div>
+        <button type="submit">Kirim</button>
     </form>
 </section>
 
