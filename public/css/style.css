@@ -535,9 +535,17 @@ body{
     color: black;
 }
 
+.blog .card-text p{
+    display: inline;
+}
+
 .blog .box-img{
     height: 200px;
     overflow: hidden;
+}
+
+.blog .card-body a{
+    margin-top: 12px;
 }
 
 /* ARTICLE PAGE */
@@ -545,8 +553,16 @@ body{
     padding: 128px 0;
 }
 
-.article .img-article, h1{
-    text-align: center;
+.article .img-article{
+    width: 480px;
+    height: 270px;
+    overflow: hidden;
+    margin: auto;
+}
+
+.article .img-article img{
+    width: 100%;
+    height: 100%;
 }
 
 .article h1{

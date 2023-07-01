@@ -37,7 +37,7 @@ const articleSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const donaturSchema = mongoose.Schema({
+const donaturSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -83,7 +83,7 @@ const donaturSchema = mongoose.Schema({
     timestamps: true
 })
 
-const Donatur = mongoose.model('Donatur', donaturSchema);
+const Donatur = mongoose.model('Donatur', donaturSchema)
 const Article = mongoose.model('Article', articleSchema)
 const Account = mongoose.model('Account', accountSchema)
 

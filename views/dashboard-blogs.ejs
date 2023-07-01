@@ -1,0 +1,19 @@
+<section id="dash-blogs" class="dash-blogs">
+    <% blogs.forEach(blog => { %>
+        <div class="list-account">
+            <p>
+                <%= blog.title %>
+            </p>
+            <div class="action-button">
+                <form action="/update-article" method="post">
+                    <input type="hidden" value="<%= blog._id %>" name="_id">
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+                <form action="/delete-article?_method=DELETE" method="post">
+                    <input type="hidden" value="<%= blog._id %>" name="_id">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
+                </form>
+            </div>
+        </div>
+        <% }); %>
+</section>

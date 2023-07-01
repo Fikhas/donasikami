@@ -248,9 +248,14 @@ app.get("/logout", (req, res) => {
 // BLOG ROUTE
 app.get("/blog", async (req, res) => {
   const blogs = await Article.find()
+  let newBlogs = []
+  blogs.forEach(blog => {
+    blog.shortArticle = blog.article.slice(3, blog.article.length - 4)
+    newBlogs.push(blog)
+  })
   res.render("blog", {
     layout: "layouts/main-layout",
-    blogs
+    newBlogs
   })
 })
 
@@ -269,23 +274,23 @@ app.get("/write", (req, res) => {
 })
 
 app.post("/write", (req, res) => {
-  // let result
-  // if(!req.file) {
-  //   result = new Error("Esktensi file hanya PNG, JPG dan JPEG")
-  //   res.render("write-article", {
-  //     layout: "layouts/main-layout",
-  //     errors: result.message
-  //   })
-  // }else{
-  //   const newArticle = {
-  //     author: req.session.user._id,
-  //     image: '.\\data\\uploads\\' + req.file.filename,
-  //     article: req.body.article,
-  //     title: req.body.title
-  //   }
-  // }
-  console.log(req.body)
-  res.redirect("/")
+  let result
+  if(!req.file) {
+    result = new Error("Esktensi file hanya PNG, JPG dan JPEG")
+    res.render("write-article", {
+      layout: "layouts/main-layout",
+      errors: result.message
+    })
+  }else{
+    const newArticle = {
+      author: req.session.user._id,
+      image: '.\\data\\uploads\\' + req.file.filename,
+      article: req.body.article,
+      title: req.body.title
+    }
+    Article.insertMany(newArticle)
+    res.redirect("/account")
+  }
 })
 
 // ACCOUNT ROUTE
@@ -300,6 +305,68 @@ app.get("/account", (req, res) => {
       layout: "layouts/main-layout"
     })
   }
+})
+
+// DASHBOARD ROUTE
+app.get("/dashboard", async (req, res) => {
+  const accounts = await Account.find()
+  res.render("dashboard-accounts", {
+    title: "ACCOUNTS",
+    layout: "layouts/dashboard-layout",
+    accounts
+  })
+})
+
+app.get("/account-dashboard", async (req, res) => {
+  const accounts = await Account.find()
+  res.render("dashboard-accounts", {
+    layout: "layouts/dashboard-layout",
+    title: "ACCOUNTS",
+    accounts
+  })
+})
+
+app.get("/blog-dashboard", async (req, res) => {
+  const blogs = await Article.find()
+  res.render("dashboard-blogs", {
+    layout: "layouts/dashboard-layout",
+    title: "BLOGS",
+    blogs
+  })
+})
+
+app.get("/donate-dashboard", async (req, res) => {
+  const donates = await Donatur.find()
+  res.render("dashboard-donates", {
+    layout: "layouts/dashboard-layout",
+    title: "DONATES",
+    donates
+  })
+})
+
+app.post("/update-article", async (req, res) => {
+  const blog = await Article.findOne({_id: req.body._id})
+  console.log(blog)
+  res.render("update-article", {
+    layout: "layouts/dashboard-layout",
+    title: "EDIT BLOG",
+    blog
+  })
+})
+
+app.put("/update-article", async (req, res) => {
+  await Article.updateOne({_id: req.body._id}, {
+    $set: {
+      title: req.body.title,
+      article: req.body.article
+    }
+  })
+  res.redirect("/dashboard")
+})
+
+app.delete("/delete-article", async (req, res) => {
+  await Article.deleteOne({_id: req.body._id})
+  res.redirect("/blog-dashboard")
 })
 
 module.exports = app;

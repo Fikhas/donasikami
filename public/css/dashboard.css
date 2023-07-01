@@ -1,0 +1,83 @@
+/* DASHBOARD PAGE */
+body{
+    background-color: #1B3C65;
+    color: white;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard .header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    z-index: 9999;
+}
+
+.dashboard .header .menu-header{
+    width: 20%;
+    border-right: 1px solid white;
+    height: 70px;
+    background-color: black;
+    padding: 10px 16px;
+}
+.dashboard .header .content-header{
+    width: 80%;
+    height: 70px;
+    background-color: black;
+    padding: 10px 16px;
+}
+
+.dashboard .body{
+    display: flex;
+    flex-direction: row;
+}
+
+.dashboard .body .menu{
+    position: fixed;
+    flex-direction: column;
+    display: flex;
+    left: 0;
+    top: 0;
+    height: 100vw;
+    width: 20%;
+    border-right: 1px solid white;
+    padding: 104px 16px 0;
+}
+
+.dashboard .body .menu a{
+    text-decoration: none;
+    color: white;
+    margin-bottom: 10px;
+    border-bottom: 1px solid white;
+}
+
+.dashboard .body .content{
+    position: relative;
+    margin-left: 20%;
+    width: 100%;
+    padding: 104px 16px 0;
+    height: 2000px;
+}
+
+/* CONTENT SECTION */
+.dash-blogs .list-account{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 0 16px 0 0;
+}
+
+.dash-blogs .list-account .action-button{
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+}

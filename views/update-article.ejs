@@ -1,0 +1,22 @@
+<section id="write-article" class="write-article">
+    <form action="/update-article?_method=PUT" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_id" value="<%= blog._id %>">
+        <div class="title">
+            <label for="title">Judul Artikel</label>
+            <input type="text" id="title" name="title" value="<%= blog.title %>">
+        </div>
+        <div class="image">
+            <label for="image">Unggah gambar</label>
+            <input type="file" id="image" name="image" value="<%= blog.image %>">
+        </div>
+        <div class="article-place">
+            <label for="article-box">Tulis Artikel</label>
+            <textarea name="article" id="article-box"><%= blog.article %></textarea>
+        </div>
+        <button type="submit">Kirim</button>
+    </form>
+</section>
+
+<script>
+    const editor = new FroalaEditor("#article-box");
+</script>

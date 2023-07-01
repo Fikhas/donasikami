@@ -1,12 +1,12 @@
 <section id="article" class="article">
-    <div class="img-article">
-        <img src="<%= article.image %>" alt="">
-    </div>
     <h1>
         <%= article.title %>
     </h1>
+    <div class="img-article">
+        <img src="<%= article.image %>" alt="">
+    </div>
     <article>
-        <%= article.article %>
+        <%- article.article %>
     </article>
     <a href="/blog" class="btn btn-primary">Kembali</a>
 </section>
