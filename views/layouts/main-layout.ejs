@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="/froalacss" rel="stylesheet" />
     <script src="/froalajs"></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <title>Donasikami.com</title>
 </head>
 
@@ -22,6 +23,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script>
+        var loadFile = function (event) {
+            var output = document.getElementById('image-place');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function () {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
 </body>
 
 </html>
