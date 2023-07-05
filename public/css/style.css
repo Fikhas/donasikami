@@ -203,6 +203,7 @@ body{
     opacity: .7;
 }
 
+/* WRITE ARTICLE PAGE */
 .write-article{
     padding: 104px;
 }
@@ -216,6 +217,46 @@ body{
 .write-article form .title{
     display: flex;
     flex-direction: column;
+    gap: 8px 0;
+}
+
+.write-article form .title input{
+    background-color: #1B3C65;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+}
+
+.write-article .image {
+    display: flex;
+    flex-direction: column;
+    gap: 8px 0;
+}
+
+.write-article .image input {
+    width: 98px;
+}
+
+.write-article .image .image-box {
+    display: flex;
+    gap: 8px 0;
+    flex-direction: column;
+    width: 50%;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.write-article .image .image-box img {
+    height: 200px;
+}
+
+.write-article .article-place {
+    display: flex;
+    flex-direction: column;
+    gap: 8px 0;
 }
 
 /* USERID PAGE */
@@ -355,7 +396,7 @@ body{
     border-radius: 100%;
 }
 
-.form-dua img{
+.form-dua .step .item img{
     width: 30px;
 }
 
@@ -383,9 +424,30 @@ body{
     flex-direction: column;
 }
 
-.form-dua image{
+.form-dua .image{
     display: flex;
     flex-direction: column;
+    gap: 8px 0;
+}
+
+.form-dua .image input{
+    width: 98px;
+}
+
+.form-dua .image .image-box{
+    display: flex;
+    gap: 8px 0;
+    flex-direction: column;
+    width: 50%;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.form-dua .image .image-box img{
+    height: 200px;
 }
 
 .form-dua .schedule{
@@ -575,38 +637,84 @@ body{
 
 /* ACCOUNT PAGE */
 .account{
-    padding: 128px;
+    padding: 128px 0 64px;
+}
+
+.account .header{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid white;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
 .account .name{
     width: 100%;
-    border: 1px solid white;
-    border-radius: 10px;
-    padding: 8px;
     margin-bottom: 16px;
+}
+
+.account .action-button{
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    gap: 0 8px;
+}
+
+.account .action-button .edit{
+    width: 100px;
 }
 
 .account .name .username-title{
     opacity: .7;
     margin: 0;
-    font-size: 14px;
 }
 
 .account .name .username-text{
     margin: 0;
 }
 
-.account .button{
-    display: inline-block;
-    background-color: #6EBADF;
-    border-radius: 5px;
-    width: 20%;
-    margin: auto;
-    border: none;
-    color: #1B3C65;
-    text-decoration: none;
-    text-align: center;
-    margin-right: 10px;
+.account .blogs{
+    margin-bottom: 32px;
+}
+
+.account .blogs .header-blogs{
+    margin: 0;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.account .blogs .header-blogs .action-button{
+    position: absolute;
+    right: 0;
+}
+
+.account .blogs .blog-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 16px;
+}
+
+.account .blogs .card{
+    display: flex;
+    flex-basis: 23%;
+    color: black;
+}
+
+.account .blogs .card-text p {
+    display: inline;
+}
+
+.account .blogs .box-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.account .blogs .card-body a {
+    margin-top: 12px;
 }
 
 /* GENERAL STYLE */

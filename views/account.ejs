@@ -1,9 +1,42 @@
 <section id="account" class="account">
-    <div class="name">
-        <p class="username-title">Username</p>
-        <p class="username-text"><%= data.username %></p>
+    <div class="header">
+        <div class="name">
+            <h3 class="username-title">Halo,</h3>
+            <h1 class="username-text">Fikri Hasan
+            </h1>
+        </div>
+        <div class="action-button">
+            <a href="/catalog/account" class="btn btn-primary edit">Edit Profil</a>
+            <a href="/catalog/logout" class="btn btn-danger">Logout</a>
+        </div>
     </div>
 
-    <a href="/logout" class="button">Logout</a>
-    <a href="/write" class="button">Buat Artikel</a>
+    <div class="blogs">
+        <div class="header-blogs">
+            <h3>Your Blogs</h3>
+            <div class="action-button">
+                <a href="/catalog/write" class="btn btn-primary">Buat Artikel</a>
+            </div>
+        </div>
+        <% if(myBlogs.length == 0) { %>
+            <p>Anda belum membuat blog</p>
+        <% } else { %>
+            <div class="blog-list">
+                <% myBlogs.forEach(blog=> { %>
+                    <div class="card" style="width: 18rem;">
+                        <div class="box-img">
+                            <img src="<%= blog.image %>" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= blog.title %>
+                            </h5>
+                            <div class="card-text"><%- '<p>' + blog.shortArticle.substring(0, 100) + '...' + '</p>' %></div>
+                            <a href="/catalog/article/<%= blog._id %>" class="btn btn-primary">Baca selengkapnya</a>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        <% } %>
+    </div>
 </section>

@@ -6,18 +6,18 @@
         </p>
     <% } %>
     <div class="step">
-        <a href="/formulir-userId">
+        <a href="/catalog/formulir-userId">
             <div class="personal-data item">
-                <img src="assets/images/data-diri.png" alt="Data Diri">
+                <img src="/assets/images/data-diri.png" alt="Data Diri">
             </div>
         </a>
-        <a href="/formulir-pickup">
+        <a href="/catalog/formulir-pickup">
             <div class="pickup-schedule item">
-                <img src="assets/images/box.png" alt="Pickup Schedule">
+                <img src="/assets/images/box.png" alt="Pickup Schedule">
             </div>
         </a>
     </div>
-    <form method="post" action="/formulir-pickup" enctype="multipart/form-data">
+    <form method="post" action="/catalog/formulir-pickup" enctype="multipart/form-data">
         <div class="category-box">
             <p>Kategori Barang</p>
             <div class="category">
@@ -80,8 +80,10 @@
 
         <div class="image">
             <label for="image">Foto Barang</label>
-            <br>
-            <input type="file" id="image" name="image" required>
+            <div class="image-box">
+                <img id="image-place" alt="Your Image">
+                <input type="file" id="image" accept="image/*" onchange="loadFile(event)" name="image" required>
+            </div>
         </div>
         <button type="submit" class="btn"><strong>KIRIM</strong></button>
     </form>

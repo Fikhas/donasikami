@@ -1,12 +1,17 @@
 <section id="write-article" class="write-article">
-    <form action="/write" method="post" enctype="multipart/form-data">
+    <h1>BUAT ARTIKEL</h1>
+    <a href="/catalog/account">Kembali</a>
+    <form action="/catalog/write" method="post" enctype="multipart/form-data">
         <div class="title">
             <label for="title">Judul Artikel</label>
             <input type="text" id="title" name="title">
         </div>
         <div class="image">
             <label for="image">Unggah gambar</label>
-            <input type="file" id="image" name="image">
+            <div class="image-box">
+                <img id="image-place" alt="Your Image">
+                <input type="file" id="image" accept="image/*" onchange="loadFile(event)" name="image" required>
+            </div>
         </div>
         <div class="article-place">
             <label for="article-box">Tulis Artikel</label>

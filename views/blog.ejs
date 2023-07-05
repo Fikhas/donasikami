@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= blog.title %></h5>
                     <div class="card-text"><%- '<p>' + blog.shortArticle.substring(0, 100) + '...' + '</p>' %></div>
-                    <a href="/article/<%= blog._id %>" class="btn btn-primary">Baca selengkapnya</a>
+                    <a href="/catalog/article/<%= blog._id %>" class="btn btn-primary">Baca selengkapnya</a>
                 </div>
             </div>
             <% }) %>

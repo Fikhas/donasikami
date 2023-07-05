@@ -1,6 +1,7 @@
 const fs = require("fs");
 const express = require("express")
 const app = express();
+const router = express.Router()
 const expressLayouts = require("express-ejs-layouts");
 var livereload = require("livereload");
 var connectLiveReload = require("connect-livereload");
@@ -17,6 +18,10 @@ const session = require("express-session");
 //   windowMs: 1 * 60 * 1000, // 1 minute
 //   max: 20,
 // });
+
+const indexRouter = require('./routes/index')
+const usersRouter = require('./routes/users')
+const catalogRouter = require("./routes/catalog")
 
 const liveReloadServer = livereload.createServer();
 liveReloadServer.server.once("connection", () => {
@@ -41,12 +46,6 @@ const fileFilter = (req, file, cb) => {
     } else {
       cb(null, false)
     }
-}
-
-const dataTempDonatur = () => {
-  let dataTemp = fs.readFileSync("./dataTemp/dataTempFile.json", "utf-8")
-  dataTemp = JSON.parse(dataTemp)
-  return dataTemp
 }
 
 if(!fs.existsSync("./dataTemp")) {
@@ -101,272 +100,8 @@ app.use(session({
   saveUninitialized: true,
   resave: true
 }))
-
-// HOME ROUTE
-app.get("/", (req, res) => {
-  dataTemp = dataTempDonatur()
-  if(!dataTemp.length == 0){
-    fs.writeFileSync("./dataTemp/dataTempFile.json", "[]", "utf-8")
-  }
-  res.render("index", {
-    layout: "layouts/main-layout",
-  })
-})
-
-// FORMULIR DONASI ROUTE
-app.get("/formulir-userId", (req, res) => {
-  dataTemp = dataTempDonatur()
-  res.render("formulir-userId", {
-    layout: "layouts/main-layout",
-    data: dataTemp
-  })
-})
-
-app.post("/formulir-userId", 
-[
-  check("email", "Email yang anda masukan salah").isEmail(),
-  check("phone", "Nomor yang anda masukan salah").isMobilePhone("id-ID"),
-], (req, res) => {
-  const result = validationResult(req)
-  if(!result.isEmpty()) {
-    res.render("formulir-userId", {
-      layout: "layouts/main-layout",
-      errors: result.array(),
-      data: dataTemp
-    })
-  }else{
-    let userId = fs.readFileSync("./dataTemp/dataTempFile.json", "utf-8");
-    userId = JSON.parse(userId);
-    if (userId.length == 0) {
-      userId.push(req.body);
-      const dataTemp = JSON.stringify(userId);
-      fs.writeFileSync("./dataTemp/dataTempFile.json", dataTemp, "utf-8");
-    }
-    res.redirect("/formulir-pickup");
-  }
-})
-
-app.get("/formulir-pickup", (req, res) => {
-  res.render("formulir-pickup", {
-    layout: "layouts/main-layout"
-  })
-})
-
-app.post("/formulir-pickup", (req, res, next) => {
-  let result
-  if(!req.file) {
-    result = new Error("Ekstensi file hanya PNG, JPG, dan JPEG")
-    res.render("formulir-pickup", {
-      layout: "layouts/main-layout",
-      errors: result.message
-    })
-  }else{
-    let userId = fs.readFileSync("./dataTemp/dataTempFile.json", "utf-8");
-    userId = JSON.parse(userId);
-    let dataTemp = userId[0];
-    dataTemp.stuffType = req.body.stuffType,
-    dataTemp.conditionType = req.body.conditionType,
-    dataTemp.description = req.body.description;
-    dataTemp.date = req.body.date;
-    dataTemp.time = req.body.time;
-    dataTemp.image = '.\\data\\uploads\\' + req.file.filename;
-    Donatur.insertMany(dataTemp)
-    fs.writeFileSync("./dataTemp/dataTempFile.json", "[]", "utf-8")
-    res.redirect("/");
-  }
-})
-
-// REGISTER, LOGIN DAN LOGOUT ROUTE
-app.get("/register", (req, res) => {
-  res.render("register", {
-    layout: "layouts/main-layout",
-  })
-})
-
-app.post("/register", [
-  check("email", "Format email yang anda masukan salah").isEmail({
-    require_tld: true,
-    domain_specific_validation: true,
-  })
-], (req, res) => {
-  console.log(req.body)
-  const result = validationResult(req)
-  if(!result.isEmpty){
-    res.render("register", {
-      layout: "layouts/main-layout",
-      errors: result.array()
-    })
-  }else{
-    if(req.body.password == req.body.passwordConfirm) {
-      const newAccount = {
-      email: req.body.email,
-      password: req.body.password,
-      username: req.body.username
-    }
-      Account.insertMany(newAccount)
-      res.redirect("/")
-    }else{
-      res.redirect("/register");
-    }
-  }
-})
-
-app.post("/login", async (req, res) => {
-  const account = await Account.findOne({email: req.body.email})
-  console.log(account)
-  let result
-  if(!account){
-    result = new Error("Akun ga ada")
-    res.render("login", {
-      layout: "layouts/main-layout",
-      errors: result.message
-    })
-  }else{
-    if(account.password == req.body.password) {
-      req.session.login = true
-      req.session.user = account
-      req.session.save()
-      res.render("account", {
-        layout: "layouts/main-layout",
-        data: req.session.user
-      })
-    }else{
-      result = new Error("Password salah")
-      res.render("login", {
-        layout: "layouts/main-layout",
-        errors: result.message
-      })
-    }
-  }
-})
-
-app.get("/logout", (req, res) => {
-  req.session.destroy()
-  res.redirect("/")
-})
-
-// BLOG ROUTE
-app.get("/blog", async (req, res) => {
-  const blogs = await Article.find()
-  let newBlogs = []
-  blogs.forEach(blog => {
-    blog.shortArticle = blog.article.slice(3, blog.article.length - 4)
-    newBlogs.push(blog)
-  })
-  res.render("blog", {
-    layout: "layouts/main-layout",
-    newBlogs
-  })
-})
-
-app.get("/article/:blogId", async (req, res) =>{
-  const article = await Article.findOne({_id: req.params.blogId})
-  res.render('article', {
-    layout: "layouts/main-layout",
-    article
-  })
-})
-
-app.get("/write", (req, res) => {
-  res.render("write-article", {
-    layout: "layouts/main-layout"
-  })
-})
-
-app.post("/write", (req, res) => {
-  let result
-  if(!req.file) {
-    result = new Error("Esktensi file hanya PNG, JPG dan JPEG")
-    res.render("write-article", {
-      layout: "layouts/main-layout",
-      errors: result.message
-    })
-  }else{
-    const newArticle = {
-      author: req.session.user._id,
-      image: '.\\data\\uploads\\' + req.file.filename,
-      article: req.body.article,
-      title: req.body.title
-    }
-    Article.insertMany(newArticle)
-    res.redirect("/account")
-  }
-})
-
-// ACCOUNT ROUTE
-app.get("/account", (req, res) => {
-  if(req.session.login){
-    res.render("account", {
-      layout: "layouts/main-layout",
-      data: req.session.user
-    })
-  }else{ 
-    res.render("login", {
-      layout: "layouts/main-layout"
-    })
-  }
-})
-
-// DASHBOARD ROUTE
-app.get("/dashboard", async (req, res) => {
-  const accounts = await Account.find()
-  res.render("dashboard-accounts", {
-    title: "ACCOUNTS",
-    layout: "layouts/dashboard-layout",
-    accounts
-  })
-})
-
-app.get("/account-dashboard", async (req, res) => {
-  const accounts = await Account.find()
-  res.render("dashboard-accounts", {
-    layout: "layouts/dashboard-layout",
-    title: "ACCOUNTS",
-    accounts
-  })
-})
-
-app.get("/blog-dashboard", async (req, res) => {
-  const blogs = await Article.find()
-  res.render("dashboard-blogs", {
-    layout: "layouts/dashboard-layout",
-    title: "BLOGS",
-    blogs
-  })
-})
-
-app.get("/donate-dashboard", async (req, res) => {
-  const donates = await Donatur.find()
-  res.render("dashboard-donates", {
-    layout: "layouts/dashboard-layout",
-    title: "DONATES",
-    donates
-  })
-})
-
-app.post("/update-article", async (req, res) => {
-  const blog = await Article.findOne({_id: req.body._id})
-  console.log(blog)
-  res.render("update-article", {
-    layout: "layouts/dashboard-layout",
-    title: "EDIT BLOG",
-    blog
-  })
-})
-
-app.put("/update-article", async (req, res) => {
-  await Article.updateOne({_id: req.body._id}, {
-    $set: {
-      title: req.body.title,
-      article: req.body.article
-    }
-  })
-  res.redirect("/dashboard")
-})
-
-app.delete("/delete-article", async (req, res) => {
-  await Article.deleteOne({_id: req.body._id})
-  res.redirect("/blog-dashboard")
-})
+app.use("/", indexRouter)
+app.use("/users", usersRouter)
+app.use("/catalog", catalogRouter)
 
 module.exports = app;

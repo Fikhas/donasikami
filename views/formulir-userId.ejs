@@ -8,20 +8,20 @@
         <% }) %>
     <% } %>
     <div class="step">
-        <a href="/formulir-userId">
+        <a href="/catalog/formulir-userId">
             <div class="personal-data item">
-                <img src="assets/images/data-diri.png" alt="Data Diri">
+                <img src="/assets/images/data-diri.png" alt="Data Diri">
             </div>
         </a>
-        <a href="/formulir-pickup">
+        <a href="/catalog/formulir-pickup">
             <div class="pickup-schedule item">
-                <img src="assets/images/box.png" alt="Pickup Schedule">
+                <img src="/assets/images/box.png" alt="Pickup Schedule">
             </div>
         </a>
     </div>
     <% if(!data.length == 0) { %>
         <% data.forEach(d => { %>
-            <form method="post" action="/formulir-userId">
+            <form method="post" action="/catalog/formulir-userId">
                 <div class="name-input input">
                     <label for="name">Nama Lengkap</label>
                     <input type="text" id="name" name="name" value="<%= d.name %>" required>
