@@ -471,6 +471,11 @@ body{
     margin: 16px auto 0;
 }
 
+/* THANKS PAGE */
+.thanks{
+    padding: 104px 0 64px;
+}
+
 /* LOGIN PAGE */
 .login{
     padding: 104px 0;

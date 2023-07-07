@@ -3,6 +3,8 @@ const {body, check, validationResult} = require("express-validator");
 
 const asyncHandler = require("express-async-handler")
 
+const {Donatur} = require("../model/modelsdb")
+
 const dataTempDonatur = () => {
     let dataTemp = fs.readFileSync("./dataTemp/dataTempFile.json", "utf-8")
     dataTemp = JSON.parse(dataTemp)
@@ -17,28 +19,29 @@ exports.form_userid = (req, res) => {
     })
 }
 
-exports.form_userid_post = [
+exports.form_userId_post = [
     check("email", "Email yang anda masukan salah").isEmail(),
     check("phone", "Nomor yang anda masukan salah").isMobilePhone("id-ID"),
-], (req, res) => {
-        const result = validationResult(req)
-        if(!result.isEmpty()) {
-        res.render("formulir-userId", {
-            layout: "layouts/main-layout",
-            errors: result.array(),
-            data: dataTemp
-    })
-    }else{
-        let userId = fs.readFileSync("./dataTemp/dataTempFile.json", "utf-8");
-        userId = JSON.parse(userId);
-        if (userId.length == 0) {
-            userId.push(req.body);
-            const dataTemp = JSON.stringify(userId);
-            fs.writeFileSync("./dataTemp/dataTempFile.json", dataTemp, "utf-8");
+    (req, res) => {
+            const result = validationResult(req)
+            if(!result.isEmpty()) {
+            res.render("formulir-userId", {
+                layout: "layouts/main-layout",
+                errors: result.array(),
+                data: dataTemp
+        })
+        }else{
+            let userId = fs.readFileSync("./dataTemp/dataTempFile.json", "utf-8");
+            userId = JSON.parse(userId);
+            if (userId.length == 0) {
+                userId.push(req.body);
+                const dataTemp = JSON.stringify(userId);
+                fs.writeFileSync("./dataTemp/dataTempFile.json", dataTemp, "utf-8");
+            }
+            res.redirect("/catalog/formulir-pickup");
         }
-        res.redirect("/formulir-pickup");
     }
-}
+]
 
 exports.form_pickup = (req, res) => {
     res.render("formulir-pickup", {
@@ -66,6 +69,12 @@ exports.form_pickup_post = (req, res) => {
         dataTemp.image = '\\data\\uploads\\' + req.file.filename;
         Donatur.insertMany(dataTemp)
         fs.writeFileSync("./dataTemp/dataTempFile.json", "[]", "utf-8")
-        res.redirect("/");
+        res.redirect("/catalog/thanks");
     }
+}
+
+exports.thanks = (req, res) => {
+    res.render("thanks", {
+        layout: "layouts/main-layout"
+    })
 }

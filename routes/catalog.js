@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const app = express()
 
 const home_controller = require("../controller/homeController");
 const form_controller = require("../controller/formController")
@@ -14,18 +15,20 @@ router.get("/", home_controller.index_home)
 // FORMULIR ROUTE
 router.get("/formulir-userId", form_controller.form_userid)
 
-router.post("/formulir-userId", form_controller.form_userid_post)
+router.post("/formulir-userId", form_controller.form_userId_post)
 
 router.get("/formulir-pickup", form_controller.form_pickup)
 
 router.post("/formulir-pickup", form_controller.form_pickup_post)
+
+router.get("/thanks", form_controller.thanks)
 
 // RLL ROUTE
 router.get("/register", rll_controller.register)
 
 router.post("/register", rll_controller.register_post)
 
-router.post("login", rll_controller.login_post)
+router.post("/login", rll_controller.login_post)
 
 router.get("/logout", rll_controller.logout)
 
@@ -52,8 +55,8 @@ router.get("/donate-dashboard", dashboard_controller.donate_dashboard)
 
 router.post("/update-article", dashboard_controller.update_article_post)
 
-router.put("/update-article", dashboard_controller.update_article_put)
+// router.put("/update-article", dashboard_controller.update_article_put)
 
-router.delete("/delete-article", dashboard_controller.delete_article)
+// router.delete("/delete-article", dashboard_controller.delete_article)
 
 module.exports = router;

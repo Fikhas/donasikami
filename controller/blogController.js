@@ -39,12 +39,12 @@ exports.write_article_post = (req, res) => {
         })
     }else{
         const newArticle = {
-            author: req.session.user._id,
-            image: '.\\data\\uploads\\' + req.file.filename,
+            author: "649fa79a9db12c37d0b45e3e",
+            image: '\\data\\uploads\\' + req.file.filename,
             article: req.body.article,
             title: req.body.title
         }
         Article.insertMany(newArticle)
-        res.redirect("/account")
+        res.redirect("/catalog/account")
     }
 }
