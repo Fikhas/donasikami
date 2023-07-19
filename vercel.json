@@ -3,7 +3,8 @@
      "builds": [ 
          { 
              "src": "./bin/www.js", 
-             "use": "@vercel/node" 
+             "use": "@vercel/node",
+             "framework": "expressjs"
          } 
      ], 
      "routes": [ 
