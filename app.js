@@ -23,12 +23,12 @@ const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const catalogRouter = require("./routes/catalog")
 
-const liveReloadServer = livereload.createServer();
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("localhost:3000");
-  }, 100);
-});
+// const liveReloadServer = livereload.createServer();
+// liveReloadServer.server.once("connection", () => {
+//   setTimeout(() => {
+//     liveReloadServer.refresh("localhost:3000");
+//   }, 100);
+// });
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -88,7 +88,7 @@ app.use(expressLayouts)
 app.use(express.static("public"))
 app.use("/froalacss", express.static(__dirname + "/node_modules/froala-editor/css/froala_editor.pkgd.min.css"))
 app.use("/froalajs", express.static(__dirname + "/node_modules/froala-editor/js/froala_editor.pkgd.min.js"))
-app.use(connectLiveReload())
+// app.use(connectLiveReload())
 app.use(multer({storage: storage, fileFilter: fileFilter}).single("image"))
 app.use(session({
   secret: "secret",
