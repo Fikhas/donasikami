@@ -2,15 +2,14 @@
      "version": 2, 
      "builds": [ 
          { 
-             "src": "./bin/www.js", 
-             "use": "@vercel/node",
-             "framework": "expressjs"
+             "src": "/bin/www.js", 
+             "use": "@vercel/node"
          } 
      ], 
      "routes": [ 
          { 
              "src": "/(.*)", 
-             "dest": "./bin/www.js" 
+             "dest": "/bin/www.js" 
          } 
      ] 
  }
