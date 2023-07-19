@@ -83,9 +83,29 @@ const donaturSchema = new mongoose.Schema({
     timestamps: true
 })
 
+const messageSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    subject: {
+        type: String,
+        required: true
+    },
+    message: {
+        type: String,
+        required: true
+    }
+}, {timestamps: true})
+
 const Donatur = mongoose.model('Donatur', donaturSchema)
 const Article = mongoose.model('Article', articleSchema)
 const Account = mongoose.model('Account', accountSchema)
+const Message = mongoose.model("Message", messageSchema)
 
 // const contact1 = new Contact({
 //     nama: 'Rifqi',
@@ -95,4 +115,4 @@ const Account = mongoose.model('Account', accountSchema)
 
 // contact1.save().then((contact) => console.log(contact));
 
-module.exports = {Donatur, Account, Article}
+module.exports = {Donatur, Account, Article, Message}

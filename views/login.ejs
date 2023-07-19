@@ -3,7 +3,7 @@
     <% if(typeof errors !="undefined" ) { %>
         <p><%= errors %></p>
     <% } %>
-    <form action="/login" method="post">
+    <form action="/catalog/login" method="post">
         <div class="email">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="email" required>
@@ -14,5 +14,5 @@
         </div>
         <button type="submit">Masuk</button>
     </form>
-    <p>Belum daftar? <a href="/register">Buat akun disni</a></p>
+    <p>Belum daftar? <a href="/catalog/register">Buat akun disni</a></p>
 </section>

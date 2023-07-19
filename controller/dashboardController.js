@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler")
 
-const {Account, Donatur, Article} = require("../model/modelsdb")
+const {Account, Donatur, Article, Message} = require("../model/modelsdb")
 
 exports.dashboard = asyncHandler(async (req, res) => {
     const accounts = await Account.find()
@@ -12,7 +12,10 @@ exports.dashboard = asyncHandler(async (req, res) => {
 })
 
 exports.account_dashboard = asyncHandler(async (req, res) => {
+    // const accounts = await Account.find()
     const accounts = await Account.find()
+    .skip(1)
+    .limit(2)
     res.render("dashboard-accounts", {
         layout: "layouts/dashboard-layout",
         title: "ACCOUNTS",
@@ -38,27 +41,52 @@ exports.donate_dashboard = asyncHandler(async (req, res) => {
     })
 })
 
-exports.update_article_post = asyncHandler(async (req, res) => {
-    const blog = await Article.findOne({_id: req.body._id})
-    console.log(blog)
-    res.render("update-article", {
+exports.message_dashboard = asyncHandler(async (req, res) => {
+    const messages = await Message.find()
+    res.render("dashboard-messages", {
         layout: "layouts/dashboard-layout",
-        title: "EDIT BLOG",
-        blog
+        title: "MESSAGES",
+        messages
     })
 })
 
-exports.update_article_put = asyncHandler(async (req, res) => {
-    await Article.updateOne({_id: req.body._id}, {
-        $set: {
-        title: req.body.title,
-        article: req.body.article
-        }
+exports.show_article = asyncHandler(async (req, res) => {
+    const article = await Article.findOne({_id: req.body._id})
+    res.render("detail-article", {
+        layout: "layouts/dashboard-layout",
+        title: "DETAIL BLOG",
+        article
     })
-    res.redirect("/dashboard")
+})
+
+exports.show_message = asyncHandler(async (req, res) => {
+    const message = await Message.findOne({_id: req.body._id})
+    res.render("message-detail", {
+        layout: "layouts/dashboard-layout",
+        title: "DETAIL MESSAGE",
+        message
+    })
 })
 
 exports.delete_article = asyncHandler(async (req, res) => {
     await Article.deleteOne({_id: req.body._id})
-    res.redirect("/blog-dashboard")
+    res.redirect("/catalog/blog-dashboard")
+})
+
+exports.show_account = asyncHandler(async (req, res) => {
+    const data = await Account.findOne({_id: req.body._id})
+    res.render("account-detail", {
+        layout: "layouts/dashboard-layout",
+        title: "DETAIL ACCOUNT",
+        data
+    })
+})
+
+exports.show_donate = asyncHandler(async (req, res) => {
+    const data = await Donatur.findOne({_id: req.body._id})
+    res.render("donate-detail", {
+        layout: "layouts/dashboard-layout",
+        title: "DETAIL DONASI",
+        data
+    })
 })

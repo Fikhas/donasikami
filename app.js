@@ -2,8 +2,8 @@ const fs = require("fs");
 const express = require("express")
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
-// var livereload = require("livereload");
-// var connectLiveReload = require("connect-livereload");
+var livereload = require("livereload");
+var connectLiveReload = require("connect-livereload");
 const bodyParser = require("body-parser")
 const methodOverride = require('method-override');
 const multer = require("multer");
@@ -23,12 +23,12 @@ const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const catalogRouter = require("./routes/catalog")
 
-// const liveReloadServer = livereload.createServer();
-// liveReloadServer.server.once("connection", () => {
-//   setTimeout(() => {
-//     liveReloadServer.refresh("localhost:3000");
-//   }, 100);
-// });
+const liveReloadServer = livereload.createServer();
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("localhost:3000");
+  }, 100);
+});
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -84,13 +84,11 @@ async function main() {
 app.set("view engine", "ejs")
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({extended: false}))
 app.use(expressLayouts)
 app.use(express.static("public"))
 app.use("/froalacss", express.static(__dirname + "/node_modules/froala-editor/css/froala_editor.pkgd.min.css"))
 app.use("/froalajs", express.static(__dirname + "/node_modules/froala-editor/js/froala_editor.pkgd.min.js"))
-// app.use(connectLiveReload())
+app.use(connectLiveReload())
 app.use(multer({storage: storage, fileFilter: fileFilter}).single("image"))
 app.use(session({
   secret: "secret",

@@ -74,7 +74,7 @@
                 <p>Melakukan konfirmasi setelah barang dikirim</p>
             </div>
             <div class="item">
-                <img src="assets/images/lokasi.png" alt="Pakaian">
+                <img src="/assets/images/lokasi.png" alt="Pakaian">
                 <p>Melacak barang di website</p>
             </div>
             <div class="item">
@@ -82,7 +82,7 @@
                 <p>Memberikan umpan balik</p>
             </div>
         </div>
-        <a href="/catalog/formulir-userId"><strong>MULAI DONASI</strong></a>
+        <a href="/catalog/formulir-userId" class="btn btn-primary"><strong>MULAI DONASI</strong></a>
     </section>
 
     <section class="about" id="about">
@@ -91,7 +91,7 @@
             <p>DonasiKami.com adalah sebuah platform yang memungkinkan pengguna untuk mendonasikan barang bekas yang masih layak pakai dan dapat digunakan kembali oleh orang lain.</p>
         </div>
         <div class="item">
-            <img src="assets/images/penghubung.png" alt="Pakaian">
+            <img src="/assets/images/penghubung.png" alt="Pakaian">
             <p>DonasiKami.com berkomitmen untuk menghubungkan para donatur dengan para penerima donasi secara mudah dan terpercaya, sehingga barang yang didonasikan dapat membantu orang yang membutuhkan.</p>
         </div>
         <div class="item">
@@ -122,5 +122,39 @@
                 <p>atau pihak penerima manfaat adalah kelompok atau individu yang menerima bantuan atau sumbangan dari program
                     donasi barang bekas di website DonasiKami.com untuk meningkatkan kesejahteraan mereka.</p>
             </div>
-        </div>
     </section>
+
+    <section id="contact" class="contact">
+        <div class="border-title">
+            <h1><strong>HUBUNGI KAMI</strong></h1>
+        </div>
+        <form action="/catalog/send-message" method="post" id="formSave">
+            <div class="name item">
+                <label for="name">Nama Lengkap</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="email item">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email">
+            </div>
+            <div class="subject item">
+                <label for="subject">Subject</label>
+                <input type="text item" name="subject" id="subject">
+            </div>
+            <div class="message item">
+                <label for="messsage">Message</label>
+                <div id="article-box"></div>
+            </div>
+            <button class="btn btn-primary" onclick="getMessage()"><strong>KIRIM</strong></button>
+        </form>
+    </section>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    
+    <script>
+        const quill = new Quill('#article-box', {
+            theme: "snow"
+        });
+    </script>
+
+

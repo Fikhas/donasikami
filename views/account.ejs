@@ -2,7 +2,7 @@
     <div class="header">
         <div class="name">
             <h3 class="username-title">Halo,</h3>
-            <h1 class="username-text">Fikri Hasan
+            <h1 class="username-text"><%= data.username %>
             </h1>
         </div>
         <div class="action-button">
@@ -32,7 +32,9 @@
                                 <%= blog.title %>
                             </h5>
                             <div class="card-text"><%- '<p>' + blog.shortArticle.substring(0, 100) + '...' + '</p>' %></div>
-                            <a href="/catalog/article/<%= blog._id %>" class="btn btn-primary">Baca selengkapnya</a>
+                            <a href="/catalog/article/<%= blog._id %>" class="btn btn-primary">Detail</a>
+                            <a href="/catalog/article/edit/<%= blog._id %>" class="btn btn-primary">Edit</a>
+                            <a href="/catalog/article/delete/<%= blog._id %>" class="btn btn-danger" onclick="confirm('Yakin ingin menghapus artikel?')">Delete</a>
                         </div>
                     </div>
                     <% }) %>

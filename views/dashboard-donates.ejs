@@ -1,9 +1,20 @@
 <section id="dash-donates" class="dash-donates">
     <% donates.forEach(donate => { %>
-        <div class="list-account">
-            <p>
-                <%= donate.name %>
-            </p>
+        <div class="list-items">
+            <div class="information">
+                <h5><%= donate.name %></h5>
+                <p><%= donate.email %></p>
+            </div>
+            <div class="action-button">
+                <form action="/catalog/show-donate" method="post">
+                    <input type="hidden" value="<%= donate._id %>" name="_id">
+                    <button type="submit" class="btn btn-primary">Detail</button>
+                </form>
+                <form action="/catalog/delete-article" method="post">
+                    <input type="hidden" value="<%= donate._id %>" name="_id">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
+                </form>
+            </div>
         </div>
         <% }); %>
 </section>

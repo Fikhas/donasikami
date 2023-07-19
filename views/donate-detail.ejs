@@ -1,0 +1,68 @@
+<section id="donate-detail" class="donate-detail">
+    <ul>
+        <li class="item-info">
+            <p>Nama</p>
+            <h5>
+                <%= data.name %>
+            </h5>
+        </li>
+        <div class="contact-donatur">
+            <li class="item-info">
+                <p>Nomor Telepon</p>
+                <h5>
+                    <%= data.phone %>
+                </h5>
+            </li>
+            <li class="item-info">
+                <p>Email</p>
+                <h5>
+                    <%= data.email %>
+                </h5>
+            </li>
+        </div>
+        <li class="item-info">
+            <p>Alamat</p>
+            <h5>
+                <%= data.address %>
+            </h5>
+        </li>
+        <div class="stuff-info">
+            <li class="item-info">
+                <p>Kategori Barang</p>
+                <h5>
+                    <%= data.stuffType %>
+                </h5>
+            </li>
+            <li class="item-info">
+                <p>Kondisi Barang</p>
+                <h5>
+                  <%= data.conditionType %>
+                </h5>
+            </li>
+        </div>
+        <li class="item-info">
+            <p>Description</p>
+            <h5>
+                <%= data.description %>
+            </h5>
+        </li>
+        <div class="pick-time">
+            <li class="item-info">
+                <p>Tanggal Jemput</p>
+                <h5>
+                    <%= data.date %>
+                </h5>
+            </li>
+            <li class="item-info">
+                <p>Waktu Jemput</p>
+                <h5>
+                    <%= data.time %>
+                </h5>
+            </li>
+        </div>
+        <li class="item-info">
+            <p>Foto Barang</p>
+            <img src="<%= data.image %>" alt="Image">
+        </li>
+    </ul>
+</section>

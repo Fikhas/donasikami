@@ -39,7 +39,7 @@ exports.write_article_post = (req, res) => {
         })
     }else{
         const newArticle = {
-            author: "649fa79a9db12c37d0b45e3e",
+            author: req.session.user._id,
             image: '\\data\\uploads\\' + req.file.filename,
             article: req.body.article,
             title: req.body.title

@@ -12,6 +12,8 @@ const dashboard_controller = require("../controller/dashboardController")
 // HOME ROUTE
 router.get("/", home_controller.index_home)
 
+router.post("/send-message", home_controller.send_message)
+
 // FORMULIR ROUTE
 router.get("/formulir-userId", form_controller.form_userid)
 
@@ -44,6 +46,13 @@ router.post("/write", blog_controller.write_article_post)
 // ACCOUNT ROUTE
 router.get("/account", account_controller.account)
 
+router.get("/article/edit/:blogId", account_controller.edit_article)
+
+router.post("/update-article-put", account_controller.update_article_put)
+
+router.get("/article/delete/:blogId",
+account_controller.delete_article)
+
 // DASHBOARD ROUTE
 router.get("/dashboard", dashboard_controller.dashboard)
 
@@ -53,10 +62,16 @@ router.get("/blog-dashboard", dashboard_controller.blog_dashboard)
 
 router.get("/donate-dashboard", dashboard_controller.donate_dashboard)
 
-router.post("/update-article", dashboard_controller.update_article_post)
+router.get("/message-dashboard", dashboard_controller.message_dashboard)
 
-// router.put("/update-article", dashboard_controller.update_article_put)
+router.post("/show-article", dashboard_controller.show_article)
 
-// router.delete("/delete-article", dashboard_controller.delete_article)
+router.post("/delete-article", dashboard_controller.delete_article)
+
+router.post("/show-account", dashboard_controller.show_account)
+
+router.post("/show-donate", dashboard_controller.show_donate)
+
+router.post("/show-message", dashboard_controller.show_message)
 
 module.exports = router;

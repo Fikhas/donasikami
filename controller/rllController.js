@@ -40,7 +40,6 @@ exports.register_post = [
 
 exports.login_post = asyncHandler(async (req, res) => {
     const account = await Account.findOne({email: req.body.email})
-    console.log(account)
     let result
     if(!account){
         result = new Error("Akun ga ada")
@@ -58,12 +57,13 @@ exports.login_post = asyncHandler(async (req, res) => {
             blogs.forEach(blog => {
                 blog.shortArticle = blog.article.slice(3, blog.article.length - 4)
                 myBlogs.push(blog)
-        })
-        res.render("account", {
-            layout: "layouts/main-layout",
-            data: req.session.user,
-            myBlogs
-        })
+            })
+            res.render("account", {
+                layout: "layouts/main-layout",
+                data: req.session.user,
+                myBlogs
+            })
+            console.log(req.session.user._id)
         }else{
         result = new Error("Password salah")
         res.render("login", {
@@ -76,5 +76,5 @@ exports.login_post = asyncHandler(async (req, res) => {
 
 exports.logout = (req, res) => {
     req.session.destroy()
-    res.redirect("/")
+    res.redirect("/catalog/account")
 }

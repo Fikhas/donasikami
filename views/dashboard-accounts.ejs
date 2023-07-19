@@ -1,8 +1,37 @@
 <section id="dash-accounts" class="dash-accounts">
     <% accounts.forEach(account => { %>
-        <div class="list-account">
-            <p><%= account.username %></p>
-            <p><%= account.email %></p>
+        <div class="list-items">
+            <div class="information">
+                <h5><%= account.username %></h5>
+                <p><%= account.email %></p>
+            </div>
+            <div class="action-button">
+                <form action="/catalog/show-account" method="post">
+                    <input type="hidden" value="<%= account._id %>" name="_id">
+                    <button type="submit" class="btn btn-primary">Detail</button>
+                </form>
+                <form action="/catalog/delete-article" method="post">
+                    <input type="hidden" value="<%= account._id %>" name="_id">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
+                </form>
+            </div>
         </div>
     <% }); %>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </section>
