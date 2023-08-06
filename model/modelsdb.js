@@ -61,7 +61,11 @@ const donaturSchema = new mongoose.Schema({
     },
     conditionType: {
         type: String,
-        required: true,
+        required: true
+    },
+    weight:{
+        type: String,
+        required: true
     },
     description: {
         type: String,

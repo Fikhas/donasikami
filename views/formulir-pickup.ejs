@@ -12,8 +12,8 @@
             </div>
         </a>
         <a href="/catalog/formulir-pickup">
-            <div class="pickup-schedule item">
-                <img src="/assets/images/box.png" alt="Pickup Schedule">
+            <div class="pickup-schedule item active">
+                <img src="/assets/images/box-blue.png" alt="Pickup Schedule">
             </div>
         </a>
     </div>
@@ -35,30 +35,32 @@
                 </div>
                 <div class="category-items">
                     <label for="lainnya">LAINNYA: </label>
-                    <input type="text" id="lainnya">
+                    <input type="text" id="lainnya" name="stuffType">
                 </div>
             </div>
         </div>
         
-        <div class="condition-box">
-            <p>Kondisi Barang</p>
-            <div class="condition">
-                <div class="category-items">
-                    <input type="radio" value="baru" id="baru" name="conditionType">
-                    <label for="baru">BARU</label>
+        <div class="condition-weight">
+            <div class="condition-box">
+                <p>Kondisi Barang</p>
+                <div class="condition">
+                    <div class="category-items">
+                        <input type="radio" value="baru" id="baru" name="conditionType">
+                        <label for="baru">BARU</label>
+                    </div>
+                    <div class="category-items">
+                        <input type="radio" value="bekas" id="bekas" name="conditionType">
+                        <label for="bekas">BEKAS</label>
+                    </div>
+                    <div class="category-items">
+                        <input type="radio" value="campuran" id="campuran" name="conditionType">
+                        <label for="campuran">CAMPURAN</label>
+                    </div>
                 </div>
-                <div class="category-items">
-                    <input type="radio" value="bekas" id="bekas" name="conditionType">
-                    <label for="bekas">BEKAS</label>
-                </div>
-                <div class="category-items">
-                    <input type="radio" value="campuran" id="campuran" name="conditionType">
-                    <label for="campuran">CAMPURAN</label>
-                </div>
-                <div class="category-items">
-                    <label for="berat-barang">Berat Barang: </label>
-                    <input type="text" id="berat-barang">
-                </div>
+            </div>
+            <div class="category-items weight">
+                <label for="berat-barang">Berat Barang: </label>
+                <input type="text" id="berat-barang" name="weight" required>
             </div>
         </div>
 

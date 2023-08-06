@@ -344,7 +344,7 @@ body{
 }
 
 .write-article .image .image-box img {
-    height: 200px;
+    width: 100%;
 }
 
 .write-article .article-place {
@@ -397,6 +397,10 @@ body{
     height: 70px;
     border: 2px solid white;
     border-radius: 100%;
+}
+
+.form-satu .step .active {
+    background-color: white;
 }
 
 .form-satu img{
@@ -505,6 +509,10 @@ body{
     border-radius: 100%;
 }
 
+.form-dua .step .active{
+    background-color: white;
+}
+
 .form-dua .step .item img{
     width: 30px;
 }
@@ -522,10 +530,25 @@ body{
     color: white;
 }
 
+.form-dua .condition-weight{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-dua .condition-weight .condition-box{
+    width: 50%;
+}
+
 .form-dua .category, .condition{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.form-dua .weight{
+    display: flex;
+    flex-direction: column;
 }
 
 .form-dua .description{
@@ -556,7 +579,7 @@ body{
 }
 
 .form-dua .image .image-box img{
-    height: 200px;
+    width: 100%;
 }
 
 .form-dua .schedule{
@@ -998,6 +1021,19 @@ body{
         gap: 16px 0;
     }
 
+    .form-dua .image .image-box {
+        width: 100%;
+        margin: auto;
+    }
+
+    .form-dua .condition-weight{
+        flex-direction: column;
+    }
+
+    .form-dua .condition-weight .condition-box {
+        width: 100%;
+    }
+
     /* LOGIN MOBILE PAGE */
     .login form{
         width: 90%;
@@ -1015,6 +1051,10 @@ body{
 
     .blog .card{
         flex-basis: 90%;
+    }
+
+    .blog .blog-list{
+        justify-content: center;
     }
 
     /* ACCOUNT MOBILE PAGE */
